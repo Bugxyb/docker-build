@@ -10,3 +10,6 @@ Docker For test
 * Redis
     * use source code to install Redis
     * Support use Redis form DockerHub
+* Mysql
+    * use Mysql Image
+    * root password 123456

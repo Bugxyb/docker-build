@@ -33,11 +33,7 @@ RUN cd $TEMP_DIR \
         && rm -rf $TEMP_DIR \
         && mkdir -p /usr/local/nginx/conf/vhost/ \
         && chown -R work:work /usr/local/nginx/
-COPY ./conf/nginx.conf /usr/local/nginx/conf/nginx.conf
-COPY ./conf/vhost/ /usr/local/nginx/conf/vhost/
 
 USER work
 EXPOSE 80
-EXPOSE 8080
-
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+EXPOSE 10080

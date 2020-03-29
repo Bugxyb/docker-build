@@ -1,0 +1,41 @@
+version: "3"
+services:
+    dev_nginx:
+        image: hyrule/nginx
+        networks:
+            - dev_test
+        ports:
+            - "10080:10080"
+        volumes:
+            - "./nginx/conf/vhost/:/usr/local/nginx/conf/vhost/"
+            - "./nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf"
+        entrypoint: ["nginx", "-g", "daemon off;"]
+        container_name: "dev_nginx"
+
+    dev_mysql:
+      image: mysql
+      networks:
+        - dev_test
+      ports:
+        - "13306:3306"
+      volumes:
+        - "./.data/mysql:/var/lib/mysql"
+      environment:
+        - MYSQL_ROOT_PASSWORD=123456
+      container_name: "dev_mysql"
+
+    dev_redis:
+      image: hyrule/redis
+      networks:
+        - dev_test
+      ports:
+        - "16379:16379"
+      volumes:
+        - "./redis/conf/redis.conf:/etc/redis.conf"
+        - "./redis/entrypoint.sh:/home/work/entrypoint.sh"
+      entrypoint: "sh /home/work/entrypoint.sh"
+      container_name: "dev_redis"
+
+networks:
+    dev_test:
+        driver: bridge

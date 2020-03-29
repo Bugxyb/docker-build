@@ -1,21 +1,13 @@
 #!/bin/bash
 
 function build() {
-    cd baseenv
-    docker build -t hyrule/baseenv .
-    cd ..
-
-    cd nginx
-    docker build -t hyrule/nginx .
-    cd ..
-
-    cd redis
-    docker build -t hyrule/redis .
-    cd ..
+    docker build -t hyrule/baseenv ./baseenv
+    docker build -t hyrule/redis ./redis
+    docker build -t hyrule/nginx ./nginx
 }
 
 function clean() {
-    docker rmi hyrule/redis hyrule/nginx hyrule/baseenv
+    docker rmi hyrule/baseenv hyrule/redis hyrule/nginx
 }
 
 function main() {

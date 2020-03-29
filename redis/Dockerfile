@@ -19,11 +19,7 @@ RUN cd $TEMP_DIR \
         && make \
         && make install \
         && rm -rf $TEMP_DIR
-COPY ./conf/redis.conf /etc/redis.conf
-
 USER work
 
 EXPOSE 80
-EXPOSE 6379
-
-ENTRYPOINT ["redis-server", "/etc/redis.conf"]
+EXPOSE 16379
